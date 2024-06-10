@@ -1,0 +1,41 @@
+/* Teacher Page Styles */
+.teacher-container {
+    padding-top: 20px;
+  }
+  
+  .teacher-title {
+    color: #dc3545;
+    margin-bottom: 20px;
+  }
+  
+  .teacher-sidebar {
+    background-color: #f8f9fa;
+    padding: 20px;
+  }
+  
+  .teacher-sidebar h2 {
+    color: #343a40;
+  }
+  
+  .teacher-sidebar ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .teacher-sidebar li {
+    margin-bottom: 10px;
+  }
+  
+  .teacher-sidebar li a {
+    color: #6c757d;
+    text-decoration: none;
+  }
+  
+  .teacher-sidebar li a:hover {
+    color: #dc3545;
+  }
+  
+  .teacher-main-content {
+    padding: 20px;
+  }
+  

@@ -1,0 +1,41 @@
+/* Student Page Styles */
+.student-container {
+    padding-top: 20px;
+  }
+  
+  .student-title {
+    color: #28a745;
+    margin-bottom: 20px;
+  }
+  
+  .student-sidebar {
+    background-color: #f8f9fa;
+    padding: 20px;
+  }
+  
+  .student-sidebar h2 {
+    color: #343a40;
+  }
+  
+  .student-sidebar ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .student-sidebar li {
+    margin-bottom: 10px;
+  }
+  
+  .student-sidebar li a {
+    color: #6c757d;
+    text-decoration: none;
+  }
+  
+  .student-sidebar li a:hover {
+    color: #28a745;
+  }
+  
+  .student-main-content {
+    padding: 20px;
+  }
+  
