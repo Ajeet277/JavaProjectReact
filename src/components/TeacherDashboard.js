@@ -1,59 +1,32 @@
-// // TeacherDashboard.js
-// import React from 'react';
-
-// const TeacherDashboard = () => {
-//   return (
-//     <div>
-//       <h3>Teacher Dashboard</h3>
-//       {/* Display statistics */}
-//       <div>
-//         <p>Total Enrollments: 50</p>
-//         <p>Total Courses: 5</p>
-//         <p>Total Earnings: $500</p>
-//       </div>
-//       {/* Button to add new course */}
-//       <button>Add New Course</button>
-//     </div>
-//   );
-// }
-
-// export default TeacherDashboard;
-
-// import React, { useEffect, useState } from 'react';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Card, Space, Statistic, Typography } from 'antd';
 import { DollarCircleOutlined } from '@ant-design/icons'; // Using DollarCircleOutlined for earnings
-// import { getTotalEnrollments, getTotalCourses, getTotalEarnings } from '../../API'; // Assuming these functions fetch the required data from the API
+import axios from 'axios';
+import { useAuth } from '../pages/Login/AuthContext';
 
 function TeacherDashboard() {
-  // const [totalEnrollments, setTotalEnrollments] = useState(0);
-  // const [totalCourses, setTotalCourses] = useState(0);
-  // const [totalEarnings, setTotalEarnings] = useState(0);
+  const [totalCourses, setTotalCourses] = useState(0);
+  const { auth } = useAuth();
 
-  // useEffect(() => {
-  //   // Fetch total enrollment count
-  //   getTotalEnrollments().then((res) => {
-  //     setTotalEnrollments(res.total);
-  //   });
-  //   // Fetch total course count
-  //   getTotalCourses().then((res) => {
-  //     setTotalCourses(res.total);
-  //   });
-  //   // Fetch total earnings
-  //   getTotalEarnings().then((res) => {
-  //     setTotalEarnings(res.total);
-  //   });
-  // }, []);
+  useEffect(() => {
+    if (auth.isAuthenticated && auth.username) {
+      axios.get(`http://localhost:8081/api/courses/teacher/${auth.username}/total`)
+        .then(response => {
+          setTotalCourses(response.data.totalCourses);
+        })
+        .catch(error => {
+          console.error('Error fetching total courses:', error);
+        });
+    }
+  }, [auth.isAuthenticated, auth.username]);
 
   return (
     <Space size={20} direction="vertical">
       <Typography.Title level={4}>Teacher Dashboard</Typography.Title>
       <Space direction="horizontal">
-        <DashboardCard title="Total Enrollments" value={10} />
-        <DashboardCard title="Total Courses" value={10} />
-        <DashboardCard title="Total Earnings" value={10} />
+        <DashboardCard title="Total Courses" value={totalCourses} />
       </Space>
-      <button>Add New Course</button> {/* Button to add new course */}
+      {/* <button type="submit">Add New Course</button> Button to add new course */}
     </Space>
   );
 }

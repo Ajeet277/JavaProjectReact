@@ -802,6 +802,7 @@ import Student from './pages/Student/Student';
 import { AuthProvider, useAuth } from './pages/Login/AuthContext';
 import Logout from './pages/Login/Logout';
 
+
 const AuthenticatedNavLinks = () => {
   const { auth } = useAuth();
 
@@ -853,6 +854,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          
 
           {/* Routes for admin */}
           <Route path="/admin/*" element={<Admin />}>
@@ -886,3 +888,116 @@ function App() {
 }
 
 export default App;
+
+
+// import React from 'react';
+// import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+// import Home from './pages/MainPage/Home';
+// import About from './pages/About/About';
+// import Login from './pages/Login/Login';
+// import Register from './pages/Register/Register';
+// import AdminDashboard from './components/AdminDashboard';
+// import TeacherDashboard from './components/TeacherDashboard';
+// import StudentDashboard from './components/StudentDashboard';
+// import ManageUsersPage from './components/ManageUsersPage';
+// import ManageCoursesPage from './components/ManageCoursesPage';
+// import ApproveRequestsPage from './components/ApproveRequestsPage';
+// import AddCourseForm from './components/AddCourseForm';
+// import AddChapterForm from './components/AddChapterForm';
+// import AddSubChapterForm from './components/AddSubChapterForm';
+// import UploadVideoForm from './components/VideoUploadForm';
+// import BrowseCourses from './components/BrowseCoursesPage';
+// import EnrolledCoursesPage from './components/EnrolledCoursesPage';
+// import Footer from './components/Footer/Footer';
+// import { Container, Nav, Navbar } from 'react-bootstrap';
+// import 'bootstrap/dist/css/bootstrap.min.css';
+// import Teacher from './pages/Teacher/Teacher';
+// import Admin from './pages/Admin/Admin';
+// import Student from './pages/Student/Student';
+// import { AuthProvider, useAuth } from './pages/Login/AuthContext';
+// import Logout from './pages/Login/Logout';
+
+// const AuthenticatedNavLinks = () => {
+//   const { auth } = useAuth();
+
+//   console.log('AuthenticatedNavLinks auth:', auth); // Debug log
+
+//   if (!auth || !auth.isAuthenticated) return null;
+
+//   return (
+//     <>
+//       {auth.user.userType === 'admin' && <Link to="/admin/dashboard" className="nav-link">Admin Panel</Link>}
+//       {auth.user.userType === 'teacher' && <Link to="/teacher/dashboard" className="nav-link">Teacher Panel</Link>}
+//       {auth.user.userType === 'student' && <Link to="/student/dashboard" className="nav-link">Student Panel</Link>}
+//       <span className="navbar-text">Logged in as {auth.user.username}</span>
+//       <Logout />
+//     </>
+//   );
+// };
+
+// const UnauthenticatedNavLinks = () => {
+//   const { auth } = useAuth();
+
+//   if (auth && auth.isAuthenticated) return null;
+
+//   return (
+//     <>
+//       <Link to="/login" className="nav-link">Login</Link>
+//       <Link to="/register" className="nav-link">Register</Link>
+//     </>
+//   );
+// };
+
+// function App() {
+//   return (
+//     <AuthProvider>
+//       <Router>
+//         <Navbar bg="dark" variant="dark">
+//           <Container>
+//             <Link to="/" className="navbar-brand">NGO Education Portal</Link>
+//             <Nav className="me-auto">
+//               <Link to="/about" className="nav-link">About Us</Link>
+//               <AuthenticatedNavLinks />
+//               <UnauthenticatedNavLinks />
+//             </Nav>
+//           </Container>
+//         </Navbar>
+
+//         <Routes>
+//           <Route path="/" element={<Home />} />
+//           <Route path="/about" element={<About />} />
+//           <Route path="/login" element={<Login />} />
+//           <Route path="/register" element={<Register />} />
+          
+//           {/* Routes for admin */}
+//           <Route path="/admin/*" element={<Admin />}>
+//             <Route path="dashboard" element={<AdminDashboard />} />
+//             <Route path="manage-users" element={<ManageUsersPage />} />
+//             <Route path="manage-courses" element={<ManageCoursesPage />} />
+//             <Route path="approve-requests" element={<ApproveRequestsPage />} />
+//           </Route>
+
+//           {/* Routes for teacher */}
+//           <Route path="/teacher/*" element={<Teacher />}>
+//             <Route path="dashboard" element={<TeacherDashboard />} />
+//             <Route path="add-course" element={<AddCourseForm />} />
+//             <Route path="add-chapter" element={<AddChapterForm />} />
+//             <Route path="add-subchapter" element={<AddSubChapterForm />} />
+//             <Route path="upload-video" element={<UploadVideoForm />} />
+//           </Route>
+
+//           {/* Routes for student */}
+//           <Route path="/student/*" element={<Student />}>
+//             <Route path="dashboard" element={<StudentDashboard />} />
+//             <Route path="browse-courses" element={<BrowseCourses />} />
+//             <Route path="register-courses" element={<EnrolledCoursesPage />} />
+//           </Route>
+//         </Routes>
+
+//         <Footer />
+//       </Router>
+//     </AuthProvider>
+//   );
+// }
+
+// export default App;

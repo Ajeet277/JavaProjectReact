@@ -51,38 +51,149 @@
 // export default AddCourseForm;
 
 
+// import React, { useState } from 'react';
+// import axios from 'axios';
+// import { useNavigate } from 'react-router-dom';
+
+// const AddCourseForm = () => {
+//   const [courseName, setCourseName] = useState('');
+//   const navigate = useNavigate();
+//   const handleSubmit = (e) => {
+//     e.preventDefault();
+    
+//     axios.post('http://localhost:8081/api/courses', { name: courseName })
+//       .then(response => {
+//         console.log('Course added:', response.data);
+//         navigate('/teacher/add-chapter');
+
+//       })
+//       .catch(error => {
+//         console.error('There was an error adding the course!', error);
+//       });
+//   };
+
+//   return (
+//     <form onSubmit={handleSubmit}>
+//       <label>
+//         Course Name:
+//         <input type="text" value={courseName} onChange={e => setCourseName(e.target.value)} />
+//       </label>
+//       <button type="submit">Add Course</button>
+//     </form>
+//   );
+// };
+
+// export default AddCourseForm;
+
+
+// import React, { useState } from 'react';
+// import axios from 'axios';
+// import { useAuth } from '../pages/Login//AuthContext';
+
+// const AddCourse = () => {
+//   const { auth } = useAuth();
+//   const [courseName, setCourseName] = useState('');
+//   const [courseDescription, setCourseDescription] = useState('');
+
+//   const handleSubmit = async (event) => {
+//     event.preventDefault();
+
+//     const newCourse = {
+//       name: courseName,
+//       description: courseDescription,
+//       teacherUsername: auth.username, // Pass the teacher's username
+//     };
+
+//     try {
+//       const response = await axios.post('http://localhost:8081/api/courses', newCourse);
+//       console.log('Course added:', response.data);
+//     } catch (error) {
+//       console.error('Error adding course:', error);
+//     }
+//   };
+
+//   return (
+//     <form onSubmit={handleSubmit}>
+//       <div>
+//         <label>Course Name:</label>
+//         <input
+//           type="text"
+//           value={courseName}
+//           onChange={(e) => setCourseName(e.target.value)}
+//         />
+//       </div>
+//       <div>
+//         <label>Course Description:</label>
+//         <textarea
+//           value={courseDescription}
+//           onChange={(e) => setCourseDescription(e.target.value)}
+//         />
+//       </div>
+//       <button type="submit">Add Course</button>
+//     </form>
+//   );
+// };
+
+// export default AddCourse;
+
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useAuth } from '../pages/Login/AuthContext';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { useNavigate } from 'react-router-dom';
 
-const AddCourseForm = () => {
+const AddCourse = () => {
+  const { auth } = useAuth();
   const [courseName, setCourseName] = useState('');
+  const [courseDescription, setCourseDescription] = useState('');
   const navigate = useNavigate();
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    
-    axios.post('http://localhost:8081/api/courses', { name: courseName })
-      .then(response => {
-        console.log('Course added:', response.data);
-        navigate('/teacher/add-chapter');
 
-      })
-      .catch(error => {
-        console.error('There was an error adding the course!', error);
-      });
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    const newCourse = {
+      name: courseName,
+      description: courseDescription,
+      teacherUsername: auth.username, // Pass the teacher's username
+    };
+
+    try {
+      const response = await axios.post('http://localhost:8081/api/courses', newCourse);
+      console.log('Course added:', response.data);
+      navigate('/teacher/add-chapter');
+    } catch (error) {
+      console.error('Error adding course:', error);
+    }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Course Name:
-        <input type="text" value={courseName} onChange={e => setCourseName(e.target.value)} />
-      </label>
-      <button type="submit">Add Course</button>
-    </form>
+    <div className="container mt-5">
+      <h2 className="mb-4">Add New Course</h2>
+      <form onSubmit={handleSubmit}>
+        <div className="mb-3">
+          <label htmlFor="courseName" className="form-label">Course Name</label>
+          <input
+            type="text"
+            className="form-control"
+            id="courseName"
+            value={courseName}
+            onChange={(e) => setCourseName(e.target.value)}
+          />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="courseDescription" className="form-label">Course Description</label>
+          <textarea
+            className="form-control"
+            id="courseDescription"
+            rows="3"
+            value={courseDescription}
+            onChange={(e) => setCourseDescription(e.target.value)}
+          />
+        </div>
+        <button type="submit" className="btn btn-primary">Add Course</button>
+      </form>
+    </div>
   );
 };
 
-export default AddCourseForm;
-
-
+export default AddCourse;

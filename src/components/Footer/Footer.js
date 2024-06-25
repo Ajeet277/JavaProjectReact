@@ -94,7 +94,7 @@ const Footer = () => {
           <div className="col-lg-3 col-md-6">
             <h4 className="mb-3">Quick Link</h4>
             <ul className="list-unstyled">
-              <li><Link to="/aboutus" className="text-light">About Us</Link></li>
+              <li><Link to="/about" className="text-light">About Us</Link></li>
               <li><Link to="/policy" className="text-light">Privacy Policy</Link></li>
               <li><Link to="/policy" className="text-light">Terms & Condition</Link></li>
               <li><Link to="/faq" className="text-light">FAQs & Help</Link></li>

@@ -1,59 +1,80 @@
-// // StudentDashboard.js
-// import React from 'react';
+
+// import React, { useState, useEffect } from 'react';
+// import axios from 'axios';
+// import { Link } from 'react-router-dom';
+// import { useAuth } from '../pages/Login/AuthContext';
 
 // const StudentDashboard = () => {
+//   const [courses, setCourses] = useState([]);
+//   const { auth } = useAuth();
+//   const username = auth.user?.username;
+
+//   useEffect(() => {
+//     if (username) {
+//       // Fetch enrolled courses
+//       axios.get(`http://localhost:8081/api/users/${username}/courses`)
+//         .then(response => {
+//           setCourses(response.data);
+//         })
+//         .catch(error => {
+//           console.error('There was an error fetching the courses!', error);
+//         });
+//     }
+//   }, [username]);
+
 //   return (
 //     <div>
-//       <h3>Student Dashboard</h3>
-//       {/* Display user-specific information */}
-//       <div>
-//         <p>Welcome, John Doe!</p>
-//         <p>Total Courses Enrolled: 3</p>
-//         <p>Total Courses Completed: 1</p>
-//       </div>
-//       {/* Button to browse courses */}
-//       <button>Browse Courses</button>
-    
+//       <h1>My Courses</h1>
+//       <p>You are enrolled in {courses.length} courses.</p> {/* Display the course count */}
+//       {/* <ul>
+//         {courses.map(course => (
+//           <li key={course}>
+//             <Link to={`/course/${course}`}>{course}</Link>
+//           </li>
+//         ))}
+//       </ul> */}
 //     </div>
 //   );
-// }
+// };
 
 // export default StudentDashboard;
 
-// import React, { useEffect, useState } from 'react';
-import { Button, Space, Statistic, Typography } from 'antd';
-import { useNavigate } from 'react-router-dom';
-// import { getStudentCourses, getCompletedCourses } from '../../API'; // Assuming these functions fetch the required data from the API
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
+import { useAuth } from '../pages/Login/AuthContext';
+import { Container, ListGroup } from 'react-bootstrap';
 
-function StudentDashboard() {
-  // const [totalEnrolledCourses, setTotalEnrolledCourses] = useState(0);
-  // const [totalCompletedCourses, setTotalCompletedCourses] = useState(0);
+const StudentDashboard = () => {
+  const [courses, setCourses] = useState([]);
+  const { auth } = useAuth();
+  const username = auth.user?.username;
 
-  // useEffect(() => {
-  //   // Fetch total enrolled courses count
-  //   getStudentCourses().then((res) => {
-  //     setTotalEnrolledCourses(res.total);
-  //   });
-  //   // Fetch total completed courses count
-  //   getCompletedCourses().then((res) => {
-  //     setTotalCompletedCourses(res.total);
-  //   });
-  // }, []);
-  const navigate = useNavigate(); // Initialize useNavigate hook
+  useEffect(() => {
+    if (username) {
+      axios.get(`http://localhost:8081/api/users/${username}/courses`)
+        .then(response => {
+          setCourses(response.data);
+        })
+        .catch(error => {
+          console.error('There was an error fetching the courses!', error);
+        });
+    }
+  }, [username]);
 
-  const handleBrowseCourses = () => {
-    navigate('/student/browse-courses'); // Navigate to the browse courses page
-  };
   return (
-    <Space size={20} direction="vertical">
-      <Typography.Title level={4}>Student Dashboard</Typography.Title>
-      <div>
-        <Statistic title="Total Courses Enrolled" value={10} />
-        <Statistic title="Total Courses Completed" value={10} />
-      </div>
-      <Button type="primary" onClick={handleBrowseCourses} >Browse Courses</Button>
-    </Space>
+    <Container>
+      <h1>My Courses</h1>
+      <p>You are enrolled in {courses.length} courses.</p>
+      {/* <ListGroup>
+        {courses.map(course => (
+          <ListGroup.Item key={course}>
+            <Link to={`/course/${course}`}>{course}</Link>
+          </ListGroup.Item>
+        ))}
+      </ListGroup> */}
+    </Container>
   );
-}
+};
 
 export default StudentDashboard;
